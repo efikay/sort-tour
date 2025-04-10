@@ -3,7 +3,7 @@ package app
 import (
 	"fmt"
 	"log"
-	"sort-tour/internal/sort_select"
+	"sort-tour/internal/ui/sort_select"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -69,7 +69,7 @@ func (m appModel) View() string {
 
 func Run() {
 	p := tea.NewProgram(appModel{
-		activeWindow:  chooseSortWindow,
+		activeWindow:     chooseSortWindow,
 		sortSelectWindow: sort_select.NewWindowModel(),
 	}, tea.WithAltScreen())
 
