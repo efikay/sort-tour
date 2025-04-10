@@ -77,7 +77,7 @@ func Main() {
 		item{title: "Odd-Even Sort", desc: "Compares odd/even indexed pairs (parallelizable)"},
 		item{title: "Strand Sort", desc: "Extracts sorted 'strands' from the list and merges them"},
 		item{title: "Intro Sort", desc: "Hybrid of quick sort, heap sort, and insertion sort"},
-		item{title: "Smooth Sort", desc: "Adaptive variant of heap sort with near-O(n) best-case performanc"},
+		item{title: "Smooth Sort", desc: "Adaptive variant of heap sort with near-O(n) best-case performance"},
 	}
 
 	m := model{list: list.New(items, list.NewDefaultDelegate(), 0, 0)}
