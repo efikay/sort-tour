@@ -1,6 +1,8 @@
 package sort_select
 
 import (
+	"sort-tour/internal/entities/sort"
+
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -26,12 +28,12 @@ func (m Window) Update(msg tea.Msg) (Window, tea.Cmd) {
 		case "enter":
 			is_filtering := m.sortList.list.FilterState() == list.Filtering
 			if !is_filtering {
-				selected_item, ok := m.sortList.list.SelectedItem().(item)
+				selected_item, ok := m.sortList.list.SelectedItem().(sort.ShortSortInfo)
 
 				if ok {
 					return m, func() tea.Msg {
 						return WindowModelChooseSortMessage{
-							SortName: selected_item.title,
+							SortName: selected_item.Title(),
 						}
 					}
 				}
