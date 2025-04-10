@@ -1,4 +1,4 @@
-package choose_sort
+package sort_select
 
 import (
 	"github.com/charmbracelet/bubbles/list"

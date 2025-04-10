@@ -3,7 +3,7 @@ package app
 import (
 	"fmt"
 	"log"
-	"sort-tour/internal/choose_sort"
+	"sort-tour/internal/sort_select"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -18,7 +18,7 @@ const (
 type appModel struct {
 	activeWindow appWindow
 
-	chooseSortModel choose_sort.WindowModel
+	sortSelectWindow sort_select.Window
 }
 
 // Init implements tea.Model.
@@ -35,9 +35,9 @@ func (m appModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		if msg.String() == "ctrl+c" {
 			return m, tea.Quit
 		}
-	case choose_sort.WindowModelQuitMessage:
+	case sort_select.WindowModelQuitMessage:
 		return m, tea.Quit
-	case choose_sort.WindowModelChooseSortMessage:
+	case sort_select.WindowModelChooseSortMessage:
 		sortName := msg.SortName
 
 		panic(fmt.Sprintf("Chosen sort name: %s", sortName))
@@ -46,7 +46,7 @@ func (m appModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	switch m.activeWindow {
 	case chooseSortWindow:
-		m.chooseSortModel, cmd = m.chooseSortModel.Update(msg)
+		m.sortSelectWindow, cmd = m.sortSelectWindow.Update(msg)
 		return m, cmd
 	case sortWindow:
 		// TODO: Make sort window
@@ -59,7 +59,7 @@ func (m appModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (m appModel) View() string {
 	switch m.activeWindow {
 	case chooseSortWindow:
-		return m.chooseSortModel.View()
+		return m.sortSelectWindow.View()
 	case sortWindow:
 		// TODO: Make sort window
 	}
@@ -69,8 +69,8 @@ func (m appModel) View() string {
 
 func Run() {
 	p := tea.NewProgram(appModel{
-		activeWindow:    chooseSortWindow,
-		chooseSortModel: choose_sort.NewWindowModel(),
+		activeWindow:  chooseSortWindow,
+		sortSelectWindow: sort_select.NewWindowModel(),
 	}, tea.WithAltScreen())
 
 	if _, err := p.Run(); err != nil {

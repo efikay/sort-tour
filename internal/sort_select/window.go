@@ -1,19 +1,19 @@
-package choose_sort
+package sort_select
 
 import (
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-type WindowModel struct {
+type Window struct {
 	sortList listModel
 }
 
-func (m WindowModel) View() string {
+func (m Window) View() string {
 	return m.sortList.View()
 }
 
-func (m WindowModel) Update(msg tea.Msg) (WindowModel, tea.Cmd) {
+func (m Window) Update(msg tea.Msg) (Window, tea.Cmd) {
 	var cmd tea.Cmd
 
 	switch msg := msg.(type) {
@@ -45,8 +45,8 @@ func (m WindowModel) Update(msg tea.Msg) (WindowModel, tea.Cmd) {
 	return m, cmd
 }
 
-func NewWindowModel() WindowModel {
-	return WindowModel{
+func NewWindowModel() Window {
+	return Window{
 		sortList: newListModel(),
 	}
 }
